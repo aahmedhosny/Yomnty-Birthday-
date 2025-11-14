@@ -1033,8 +1033,8 @@
 	            }
 	        }
 	    
-// تشغيل الموسيقى مع أول ضغطة
-window.addEventListener('click', () => {
+// تشغيل الموسيقى مع أول لمسة على الشاشة
+window.addEventListener('touchstart', () => {
     backgroundMusic.play().catch(() => {});
 }, { once: true });
 
