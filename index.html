@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Yomnty</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-color: #F7DDE2;
+            --secondary-color: #F5E9DA;
+            --accent-color: #C71F37;
+            --gold-color: #FFD700;
+            --dusty-rose: #D9A7A0;
+            --text-color: #333;
+            --light-bg: rgba(255, 255, 255, 0.7);
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 50%, #FFF5EB 100%);
+            color: var(--text-color);
+            overflow-x: hidden;
+            min-height: 100vh;
+            transition: background 0.3s ease;
+        }
+        body.dark-mode {
+            --primary-color: #2a1a1f;
+            --secondary-color: #3d2a2f;
+            --accent-color: #ff6b7a;
+            --gold-color: #ffa500;
+            --dusty-rose: #d9a7a0;
+            --text-color: #f0e6e6;
+            --light-bg: rgba(50, 35, 40, 0.7);
+            background: linear-gradient(135deg, #2a1a1f 0%, #3d2a2f 50%, #4a3338 100%);
+        }
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, var(--gold-color), rgba(255, 215, 0, 0)),
+                radial-gradient(2px 2px at 60px 70px, var(--gold-color), rgba(255, 215, 0, 0)),
+                radial-gradient(1px 1px at 50px 50px, var(--gold-color), rgba(255, 215, 0, 0)),
+                radial-gradient(1px 1px at 130px 80px, var(--gold-color), rgba(255, 215, 0, 0)),
+                radial-gradient(2px 2px at 90px 10px, var(--gold-color), rgba(255, 215, 0, 0));
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            background-position: 0 0;
+            animation: particleShift 20s linear infinite;
+            opacity: 0.4;
+        }
+        @keyframes particleShift { 0% { background-position: 0 0; } 100% { background-position: 0 200px; } }
+        .floating-heart {
+            position: fixed;
+            bottom: -50px;
+            font-size: 2em;
+            opacity: 0.7;
+            animation: floatUp 4s ease-in-out forwards;
+            pointer-events: none;
+            z-index: 0;
+        }
+        @keyframes floatUp {
+            0% { bottom: -50px; opacity: 1; }
+            100% { bottom: 100vh; opacity: 0; transform: translateX(100px) rotate(360deg); }
+        }
+        .content {
+            position: relative;
+            z-index: 2;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+	        .control-buttons-container {
+	            display: flex;
+	            justify-content: center;
+	            gap: 20px;
+	            margin-bottom: 30px;
+	            padding-top: 30px;
+	        }
+	        .theme-toggle {
+	            /* Position controlled by parent container */
+            background: var(--light-bg);
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        .theme-toggle:hover { transform: scale(1.05); box-shadow: 0 4px 15px rgba(199, 31, 55, 0.3); }
+	        .music-toggle {
+	            /* Position controlled by parent container */
+            background: var(--light-bg);
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        .music-toggle:hover { transform: scale(1.05); box-shadow: 0 4px 15px rgba(199, 31, 55, 0.3); }
+        .welcome-section {
+            text-align: center;
+            padding: 80px 40px;
+            background: var(--light-bg);
+            border-radius: 20px;
+            margin-bottom: 60px;
+            box-shadow: 0 8px 32px rgba(199, 31, 55, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        .welcome-section h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5em;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.3;
+            letter-spacing: 1px;
+        }
+        .welcome-section p {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5em;
+            color: var(--dusty-rose);
+            font-weight: 400;
+            line-height: 1.8;
+        }
+        .carousel-section { margin-bottom: 60px; text-align: center; }
+        .carousel-container {
+            position: relative;
+            width: 300px;
+            height: 350px;
+            margin: 40px auto;
+            perspective: 1000px;
+        }
+        .carousel-heart {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .carousel-image {
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(135deg, var(--dusty-rose), var(--gold-color));
+            clip-path: polygon(50% 100%, 0% 62%, 0% 25%, 25% 0%, 50% 20%, 75% 0%, 100% 25%, 100% 62%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-size: 1em;
+            animation: fadeIn 0.5s ease;
+            box-shadow: 0 10px 30px rgba(199, 31, 55, 0.3);
+            animation: heartBeat 1.5s ease-in-out infinite, fadeIn 0.5s ease;
+            padding: 20px;
+            text-align: center;
+            line-height: 1.8;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes heartBeat { 0%, 100% { transform: scale(1); } 25% { transform: scale(1.05); } 50% { transform: scale(1); } }
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .carousel-btn {
+            background: linear-gradient(135deg, var(--accent-color), var(--gold-color));
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .carousel-btn:hover { transform: scale(1.1); box-shadow: 0 4px 15px rgba(199, 31, 55, 0.3); }
+        .carousel-counter {
+            text-align: center;
+            margin-top: 15px;
+            font-family: 'Playfair Display', serif;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+        .quote-section {
+            background: var(--light-bg);
+            padding: 50px 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 60px;
+            box-shadow: 0 8px 32px rgba(199, 31, 55, 0.1);
+        }
+        .quote-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2em;
+            color: var(--accent-color);
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+        .quote-display {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4em;
+            color: var(--dusty-rose);
+            font-style: italic;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            animation: slideIn 0.5s ease;
+        }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .quote-btn {
+            background: linear-gradient(135deg, var(--accent-color), var(--gold-color));
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .quote-btn:hover { transform: scale(1.05); box-shadow: 0 4px 15px rgba(199, 31, 55, 0.3); }
+        .reasons-section { margin-bottom: 60px; }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5em;
+            text-align: center;
+            color: var(--accent-color);
+            margin-bottom: 50px;
+            font-weight: 700;
+        }
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        .reason-card {
+            background: var(--light-bg);
+            padding: 40px 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(217, 167, 160, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 5px solid var(--gold-color);
+        }
+        .reason-card:hover { transform: translateY(-10px); box-shadow: 0 8px 25px rgba(199, 31, 55, 0.15); }
+        .reason-icon { font-size: 3em; margin-bottom: 15px; }
+        .reason-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3em;
+            color: var(--dusty-rose);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        .gallery-section { margin-bottom: 60px; }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .gallery-item {
+            position: relative;
+            height: 250px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(199, 31, 55, 0.1);
+            transition: transform 0.3s ease;
+            background: linear-gradient(135deg, var(--dusty-rose), var(--gold-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2em;
+            cursor: pointer;
+        }
+        .gallery-item:hover { transform: scale(1.05); }
+        .time-since-section {
+            background: var(--light-bg);
+            padding: 60px 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 60px;
+            box-shadow: 0 8px 32px rgba(199, 31, 55, 0.1);
+        }
+        .time-since-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2em;
+            color: var(--accent-color);
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+        .time-counter {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .time-item {
+            background: linear-gradient(135deg, var(--primary-color), var(--gold-color));
+            padding: 20px 30px;
+            border-radius: 10px;
+            min-width: 80px;
+        }
+        .time-item .number {
+            font-size: 2em;
+            font-weight: 700;
+            color: var(--accent-color);
+            display: block;
+        }
+        .time-item .label {
+            font-size: 0.9em;
+            color: var(--dusty-rose);
+            margin-top: 5px;
+        }
+        .time-message {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3em;
+            color: var(--dusty-rose);
+            font-style: italic;
+        }
+        .surprise-section {
+            text-align: center;
+            padding: 60px 40px;
+            background: var(--light-bg);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(199, 31, 55, 0.1);
+        }
+        .surprise-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2em;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        .surprise-section p {
+            font-size: 1.1em;
+            color: var(--text-color);
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+        .mystery-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--accent-color), var(--gold-color));
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(199, 31, 55, 0.3);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        .mystery-button:hover { transform: scale(1.1); box-shadow: 0 8px 25px rgba(199, 31, 55, 0.5); }
+        .mystery-button:active { transform: scale(0.95); }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s ease;
+        }
+        .modal-content {
+            background: linear-gradient(135deg, #FFF5EB, var(--primary-color));
+            margin: 5% auto;
+            padding: 40px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.4s ease;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        body.dark-mode .modal-content {
+            background: linear-gradient(135deg, #4a3338, #3d2a2f);
+        }
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .close-modal {
+            color: var(--accent-color);
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .close-modal:hover { color: var(--gold-color); }
+        .modal-header { text-align: center; margin-bottom: 30px; }
+        .modal-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2em;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        .modal-body { margin-bottom: 30px; }
+        .love-message {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2em;
+            color: var(--text-color);
+            line-height: 2;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .memory-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, var(--dusty-rose), var(--gold-color));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2em;
+            margin: 20px 0;
+            text-align: center;
+            padding: 20px;
+        }
+        .play-story-btn {
+            display: block;
+            margin: 30px auto;
+            background: linear-gradient(135deg, var(--accent-color), var(--gold-color));
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .play-story-btn:hover { transform: scale(1.05); box-shadow: 0 4px 15px rgba(199, 31, 55, 0.3); }
+        @media (max-width: 768px) {
+            .welcome-section h1 { font-size: 2.5em; }
+            .welcome-section p { font-size: 1.2em; }
+            .section-title { font-size: 2em; }
+            .theme-toggle { top: 20px; right: 20px; padding: 8px 16px; font-size: 0.9em; }
+            .music-toggle { top: 20px; left: 20px; padding: 8px 16px; font-size: 0.9em; }
+            .mystery-button { bottom: 20px; right: 20px; padding: 12px 24px; font-size: 0.9em; }
+            .modal-content { width: 95%; padding: 30px 20px; margin: 20% auto; }
+            .time-counter { gap: 10px; }
+            .time-item { padding: 15px 20px; min-width: 70px; }
+            .time-item .number { font-size: 1.5em; }
+            .carousel-container { width: 250px; height: 300px; }
+            .carousel-image { width: 200px; height: 200px; }
+        }
+        @media (max-width: 480px) {
+            .welcome-section { padding: 40px 20px; }
+            .welcome-section h1 { font-size: 2em; }
+            .welcome-section p { font-size: 1em; }
+            .reasons-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .time-counter { flex-direction: column; gap: 15px; }
+            .time-item { width: 100%; }
+            .carousel-container { width: 200px; height: 250px; }
+            .carousel-image { width: 150px; height: 150px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles-container"></div>
+	    <div class="control-buttons-container">
+	        <button class="music-toggle" id="musicToggle">🎵 Play Music</button>
+	        <button class="theme-toggle" id="themeToggle">🌙 Night Mode</button>
+	    </div>
+    <audio id="backgroundMusic" style="display: none;">
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+    <div class="content">
+        <section class="welcome-section">
+            <h1>Happy Birthday Yomnty —<br>You are the spark that turns my days into celebrations.</h1>
+            <p>A moment to celebrate the most beautiful soul I know.</p>
+        </section>
+        <section class="carousel-section">
+            <h2 class="section-title">💖 Our Beautiful Moments</h2>
+            <div class="carousel-container">
+                <div class="carousel-heart">
+                    <div class="carousel-image" id="carouselImage">أحتاج لك</div>
+                </div>
+            </div>
+            <div class="carousel-controls">
+                <button class="carousel-btn" id="prevBtn">← السابق</button>
+                <button class="carousel-btn" id="nextBtn">التالي →</button>
+            </div>
+            <div class="carousel-counter">
+                <span id="carouselCounter">1</span> / <span id="carouselTotal">6</span>
+            </div>
+        </section>
+        <section class="quote-section">
+            <h2>✨ Love Quote of the Moment</h2>
+            <div class="quote-display" id="quoteDisplay">
+                "Every moment with you is a moment I treasure forever."
+            </div>
+            <button class="quote-btn" id="quoteBtn">💕 Get a Love Quote</button>
+        </section>
+        <section class="reasons-section">
+            <h2 class="section-title">✨ The Reasons I Love You</h2>
+            <div class="reasons-grid">
+                <div class="reason-card">
+                    <div class="reason-icon">🌅</div>
+                    <h3>Your Smile… My Favorite Sunrise</h3>
+                </div>
+                <div class="reason-card">
+                    <div class="reason-icon">🎵</div>
+                    <h3>The Melody That Calms My Heart</h3>
+                </div>
+                <div class="reason-card">
+                    <div class="reason-icon">✨</div>
+                    <h3>A Soul That Inspires My Soul</h3>
+                </div>
+                <div class="reason-card">
+                    <div class="reason-icon">✨</div>
+                    <h3>Moments With You Feel Like Magic</h3>
+                </div>
+                <div class="reason-card">
+                    <div class="reason-icon">😄</div>
+                    <h3>A Laugh I Never Want to Forget</h3>
+                </div>
+                <div class="reason-card">
+                    <div class="reason-icon">💗</div>
+                    <h3>My Safe Place — Always You</h3>
+                </div>
+            </div>
+        </section>
+        <section class="gallery-section">
+            <h2 class="section-title">📸 Memories Gallery</h2>
+	            <div class="gallery-grid">
+	                <div class="gallery-item"><img src="IMG-20251104-WA0038.jpg" alt="Memory 1"></div>
+	                <div class="gallery-item"><img src="IMG_20251029_171941_326.jpg" alt="Memory 2"></div>
+	                <div class="gallery-item"><img src="IMG_20251026_204127_497.jpg" alt="Memory 3"></div>
+	                <div class="gallery-item"><img src="IMG_20251024_152158_050.jpg" alt="Memory 4"></div>
+	                <div class="gallery-item"><img src="IMG_20251028_162409_489.jpg" alt="Memory 5"></div>
+	                <div class="gallery-item"><img src="Screenshot_20251114_101605.jpg" alt="Memory 6"></div>
+	            </div>
+        </section>
+        <section class="time-since-section">
+            <h2>⏱️ Time Since We Met</h2>
+            <div class="time-counter">
+                <div class="time-item">
+                    <span class="number" id="days">0</span>
+                    <span class="label">Days</span>
+                </div>
+                <div class="time-item">
+                    <span class="number" id="hours">0</span>
+                    <span class="label">Hours</span>
+                </div>
+                <div class="time-item">
+                    <span class="number" id="minutes">0</span>
+                    <span class="label">Minutes</span>
+                </div>
+                <div class="time-item">
+                    <span class="number" id="seconds">0</span>
+                    <span class="label">Seconds</span>
+                </div>
+            </div>
+            <p class="time-message">Every second with you is a blessing I cherish.</p>
+        </section>
+        <section class="surprise-section">
+            <h2>🎁 One More Thing...</h2>
+            <p>There's a special surprise waiting for you. Look for the button at the bottom right of the page.</p>
+        </section>
+    </div>
+    <button class="mystery-button" id="mysteryBtn">🎀 Open The Memory Box</button>
+    <div id="memoryModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <div class="modal-header">
+                <h2>💗 A Message From My Heart</h2>
+            </div>
+            <div class="modal-body">
+                <p class="love-message">
+                    Dear Yomnty,<br><br>
+                    On this special day, I want you to know that you are not just a birthday to celebrate—you are a celebration in yourself. Every moment with you feels like a gift I never knew I needed.<br><br>
+                    Your smile lights up my darkest days. Your laugh is the melody that plays in my heart when everything feels silent. Your presence is the safe harbor I return to when the world feels too heavy.<br><br>
+                    You inspire me to be better, to dream bigger, and to love deeper. With you, even the simplest moments become memories I treasure forever.<br><br>
+                    Thank you for being you. Thank you for letting me be part of your story.<br><br>
+                    Happy Birthday to the person who makes my life infinitely more beautiful.<br><br>
+                    With all my love,<br>
+                    Always Yours ✨
+                </p>
+                <div class="memory-image">🌹 صورتك تضيء حياتي 🌹<br><br>ضع صورتك الخاصة هنا</div>
+                <button class="play-story-btn" id="playStoryBtn">▶ Play Our Story</button>
+            </div>
+        </div>
+    </div>
+	    <audio id="backgroundMusic" loop autoplay>
+	        <source src="Albumaty.Com_mhmwd_alasyly_kl_snt_-_ealan_wady_dglt_llttwyr_alakary.mp3" type="audio/mpeg">
+	        Your browser does not support the audio element.
+	    </audio>
+	    <script>
+        const loveQuotes = [
+            "Every moment with you is a moment I treasure forever.",
+            "You are the reason my heart beats faster.",
+            "In your eyes, I found my home.",
+            "You make ordinary moments feel extraordinary.",
+            "My heart chose you before my mind caught up.",
+            "With you, I found the love I was searching for.",
+            "You are my favorite person and my greatest adventure.",
+            "Every day with you is a blessing I never take for granted.",
+            "Your love is the greatest gift I've ever received.",
+            "You are the melody my heart sings to.",
+            "In a world full of chaos, you are my peace.",
+            "I fall in love with you more and more each day.",
+            "You are my favorite hello and my hardest goodbye.",
+            "With you, forever doesn't seem long enough.",
+            "You are the dream I never want to wake up from."
+        ];
+
+	        const memoryTitles = [
+	            "You are the finest, loveliest, tenderest, and most beautiful person I have ever known.",
+	            "My heart is and always will be yours.",
+	            "The best thing to hold onto in life is each other.",
+	            "Every love story is beautiful, but ours is my favorite.",
+	            "You are my today and all of my tomorrows.",
+	            "I love you more than I have ever found a way to say to you."
+	        ];
+
+        const themeToggle = document.getElementById('themeToggle');
+        const musicToggle = document.getElementById('musicToggle');
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        let isPlaying = false;
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            themeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️ Light Mode' : '🌙 Night Mode';
+            localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+        });
+
+	        // The music is set to autoplay, so we just need to update the button state
+	        // and handle the toggle logic.
+	        musicToggle.textContent = '⏸️ Stop Music';
+	        isPlaying = true;
+	
+	        musicToggle.addEventListener('click', () => {
+	            if (isPlaying) {
+	                backgroundMusic.pause();
+	                musicToggle.textContent = '🎵 Play Music';
+	                isPlaying = false;
+	            } else {
+	                // Attempt to play, but modern browsers may block it unless user interacts first.
+	                backgroundMusic.play().catch(error => {
+	                    console.log("Autoplay was prevented:", error);
+	                    alert("للتشغيل، يرجى التفاعل مع الصفحة أولاً (مثل الضغط على الزر مرة أخرى).");
+	                });
+	                musicToggle.textContent = '⏸️ Stop Music';
+	                isPlaying = true;
+	            }
+	        });
+
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeToggle.textContent = '☀️ Light Mode';
+        }
+
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.textContent = '💗';
+            heart.style.left = Math.random() * 100 + '%';
+            document.body.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 4000);
+        }
+        setInterval(createFloatingHeart, 3000);
+
+        let currentSlide = 1;
+        const totalSlides = 6;
+
+        function updateCarousel() {
+            document.getElementById('carouselImage').textContent = memoryTitles[currentSlide - 1];
+            document.getElementById('carouselCounter').textContent = currentSlide;
+        }
+
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            currentSlide = currentSlide === totalSlides ? 1 : currentSlide + 1;
+            updateCarousel();
+        });
+
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            currentSlide = currentSlide === 1 ? totalSlides : currentSlide - 1;
+            updateCarousel();
+        });
+
+        const quoteDisplay = document.getElementById('quoteDisplay');
+        const quoteBtn = document.getElementById('quoteBtn');
+
+        quoteBtn.addEventListener('click', () => {
+            const randomQuote = loveQuotes[Math.floor(Math.random() * loveQuotes.length)];
+            quoteDisplay.textContent = '"' + randomQuote + '"';
+        });
+
+	        function updateTimeSince() {
+	            // Start Date: September 25, 2025, 00:00:00 (51 days before Nov 15, 2025, 00:00:00)
+	            // Month is 0-indexed (8 for September)
+	            const meetDate = new Date(2025, 8, 25, 0, 0, 0);
+            const now = new Date();
+            const distance = now - meetDate;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+        }
+
+        updateTimeSince();
+        setInterval(updateTimeSince, 1000);
+
+        const mysteryBtn = document.getElementById('mysteryBtn');
+        const memoryModal = document.getElementById('memoryModal');
+        const closeModal = document.getElementById('closeModal');
+        const playStoryBtn = document.getElementById('playStoryBtn');
+
+        mysteryBtn.addEventListener('click', () => {
+            memoryModal.style.display = 'block';
+        });
+
+        closeModal.addEventListener('click', () => {
+            memoryModal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target === memoryModal) {
+                memoryModal.style.display = 'none';
+            }
+        });
+
+        playStoryBtn.addEventListener('click', () => {
+            alert('🎬 Our Story:\n\nEvery moment with you is a frame in the most beautiful movie of my life. Thank you for being my favorite scene in every chapter. 💕');
+        });
+    </script>
+</body>
+</html>
