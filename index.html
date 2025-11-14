@@ -866,7 +866,10 @@
 	        const mysteryBtn = document.getElementById('mysteryBtn');
 	        const closeModal = document.getElementById('closeModal');
 
-	        mysteryBtn.onclick = function() { modal.style.display = "block"; }
+	        mysteryBtn.onclick = function() {
+    // تشغيل الموسيقى عند فتح البوكس
+    backgroundMusic.play().catch(() => {});
+ modal.style.display = "block"; }
 	        closeModal.onclick = function() { modal.style.display = "none"; }
 	        window.onclick = function(event) {
 	            if (event.target == modal) {
@@ -1032,12 +1035,6 @@
 	                modal.style.display = "none";
 	            }
 	        }
-	    
-// تشغيل الموسيقى مع أول لمسة على الشاشة
-window.addEventListener('touchstart', () => {
-    backgroundMusic.play().catch(() => {});
-}, { once: true });
-
-</script>
+	    </script>
 </body>
 </html>
