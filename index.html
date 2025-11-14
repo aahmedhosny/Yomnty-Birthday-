@@ -1032,6 +1032,12 @@
 	                modal.style.display = "none";
 	            }
 	        }
-	    </script>
+	    
+// تشغيل الموسيقى مع أول ضغطة
+window.addEventListener('click', () => {
+    backgroundMusic.play().catch(() => {});
+}, { once: true });
+
+</script>
 </body>
 </html>
