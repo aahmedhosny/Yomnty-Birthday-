@@ -292,11 +292,57 @@
             cursor: pointer;
         }
         .gallery-item:hover { transform: scale(1.05); }
+        
+        /* New CSS for Story Mode */
+        .story-mode-active {
+            filter: blur(5px);
+            transition: filter 1s ease-in-out;
+        }
+        
+        .typewriter-text {
+            overflow: hidden; /* Ensures the text is not visible until typed */
+            border-right: .15em solid var(--accent-color); /* The blinking cursor */
+            white-space: nowrap; /* Keeps the content on a single line */
+            margin: 0 auto;
+            letter-spacing: .15em; /* Adjust as needed */
+            animation: 
+                typing 4s steps(40, end),
+                blink-caret .75s step-end infinite;
+        }
+        
+        /* The typing animation */
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        /* The typewriter cursor effect */
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--accent-color); }
+        }
         /* FIX: Ensure image covers the area without being zoomed, while maintaining aspect ratio */
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: contain; /* Changed from 'cover' to 'contain' to show the full image */
+        }
+        
+        /* New CSS for Story Mode Hearts */
+        .story-heart {
+            position: fixed;
+            bottom: -50px;
+            font-size: 3em; /* Larger hearts */
+            opacity: 0.9;
+            animation: floatUpStory 6s ease-in-out forwards;
+            pointer-events: none;
+            z-index: 1001; /* Above the modal */
+            color: #FF69B4; /* Pink color for hearts */
+        }
+        
+        @keyframes floatUpStory {
+            0% { bottom: -50px; opacity: 0.9; transform: translateX(0) scale(1); }
+            100% { bottom: 100vh; opacity: 0; transform: translateX(50px) scale(1.5) rotate(30deg); }
         }
         .time-since-section {
             background: var(--light-bg);
@@ -437,6 +483,91 @@
             line-height: 2;
             text-align: center;
             margin-bottom: 20px;
+            min-height: 300px;
+            display: block;
+        }
+        
+        /* New CSS for Story Popup */
+        .story-popup {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 2000; /* Above everything */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8); /* Dark, blurred background */
+            backdrop-filter: blur(10px);
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .story-content {
+            background: var(--light-bg);
+            padding: 40px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            position: relative;
+            text-align: center;
+            z-index: 2001;
+        }
+        
+        .close-story {
+            color: var(--accent-color);
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .close-story:hover { color: var(--gold-color); }
+        
+        .story-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2em;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+        
+        .story-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5em;
+            color: var(--text-color);
+            line-height: 1.8;
+            white-space: pre-wrap; /* To handle \n in the JS text */
+            min-height: 200px; /* Ensure space for the text */
+            display: block;
+            text-align: right;
+            direction: rtl;
+        }
+        
+        /* Floating Hearts Container and Heart Style */
+        .floating-hearts-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 2000;
+        }
+        
+        .heart {
+            position: absolute;
+            font-size: 2em;
+            animation: floatUp 4s linear infinite;
+            opacity: 0.8;
+        }
+        
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(1); opacity: 0.8; }
+            100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
         }
         .memory-image {
             width: 100%;
@@ -482,7 +613,7 @@
             .carousel-container { width: 250px; height: 300px; }
             .carousel-image { width: 200px; height: 200px; }
         }
-        @media (max-width: 480px) {
+        @media (max-width: 500px) {
             .welcome-section { padding: 40px 20px; }
             .welcome-section h1 { font-size: 2em; }
             .welcome-section p { font-size: 1em; }
@@ -514,8 +645,8 @@
                 </div>
             </div>
             <div class="carousel-controls">
-                <button class="carousel-btn" id="prevBtn">← السابق</button>
-                <button class="carousel-btn" id="nextBtn">التالي →</button>
+                <button class="carousel-btn" id="prevBtn">← Previous</button>
+                <button class="carousel-btn" id="nextBtn">Next →</button>
             </div>
             <div class="carousel-counter">
                 <span id="carouselCounter">1</span> / <span id="carouselTotal">6</span>
@@ -564,7 +695,7 @@
 	                <div class="gallery-item"><img src="IMG_20251029_171941_326.jpg" alt="Memory 2"></div>
 	                <div class="gallery-item"><img src="IMG_20251026_204127_497.jpg" alt="Memory 3"></div>
 	                <div class="gallery-item"><img src="IMG_20251024_152158_050.jpg" alt="Memory 4"></div>
-	                <div class="gallery-item"><img src="IMG_20251028_162409_489.jpg" alt="Memory 5"></div>
+	                <div class="gallery-item"><img src="IMG_20251028_162409_509.jpg" alt="Memory 5"></div>
 	                <div class="gallery-item"><img src="Screenshot_20251114_101605.jpg" alt="Memory 6"></div>
 	            </div>
         </section>
@@ -603,7 +734,7 @@
                 <h2>💗 A Message From My Heart</h2>
             </div>
             <div class="modal-body">
-                <p class="love-message">
+                <p class="love-message" id="originalMessageText">
                     Dear Yomnty,<br><br>
                     On this special day, I want you to know that you are not just a birthday to celebrate—you are a celebration in yourself. Every moment with you feels like a gift I never knew I needed.<br><br>
                     Your smile lights up my darkest days. Your laugh is the melody that plays in my heart when everything feels silent. Your presence is the safe harbor I return to when the world feels too heavy.<br><br>
@@ -623,6 +754,23 @@
 	        <source src="Albumaty.Com_mhmwd_alasyly_kl_snt_-_ealan_wady_dglt_llttwyr_alakary.mp3" type="audio/mpeg">
 	        Your browser does not support the audio element.
 	    </audio>
+	    
+	    <!-- New Audio for Story Mode - Placeholder. User needs to provide a file named 'romantic_story_music.mp3' -->
+	    <audio id="storySound">
+	        <source src="romantic_story_music.mp3" type="audio/mpeg">
+	        Your browser does not support the audio element.
+	    </audio>
+	    
+	    <!-- New Story Popup Structure -->
+	    <div id="storyPopup" class="story-popup">
+	        <div id="floatingHearts" class="floating-hearts-container"></div>
+	        <div class="story-content">
+	            <span id="closeStory" class="close-story">&times;</span>
+	            <h2 class="story-title">قصتنا</h2>
+	            <p id="storyText" class="story-text"></p>
+	        </div>
+	    </div>
+	    
 	    <script>
         const loveQuotes = [
             "Every moment with you is a moment I treasure forever.",
@@ -687,7 +835,7 @@
 	        });
 
 	        // Time Since Counter (Set your start date here: Year, Month (0-11), Day)
-	        const startDate = new Date(2024, 0, 1); // Example: January 1, 2024
+		        const startDate = new Date(2025, 8, 25); // FIX: Setting the start date to September 25, 2025, so that on Nov 14, 2025, it shows 50 days. (Month is 0-indexed: 8 = September)
 	        const daysEl = document.getElementById('days');
 	        const hoursEl = document.getElementById('hours');
 	        const minutesEl = document.getElementById('minutes');
@@ -757,7 +905,8 @@
 	            isPlaying = !isPlaying;
 	        });
 
-	        // Floating Hearts
+	        // Floating Hearts (General)
+	        let generalHeartInterval;
 	        function createHeart() {
 	            const heart = document.createElement('div');
 	            heart.classList.add('floating-heart');
@@ -771,8 +920,116 @@
 	                heart.remove();
 	            }, 5000);
 	        }
+	        
+	        function startGeneralHearts() {
+	            if (!generalHeartInterval) {
+	                generalHeartInterval = setInterval(createHeart, 300); // Create a new heart every 300ms
+	            }
+	        }
+	        
+	        function stopGeneralHearts() {
+	            clearInterval(generalHeartInterval);
+	            generalHeartInterval = null;
+	        }
+	        
+	        startGeneralHearts(); // Start on page load
 
-	        setInterval(createHeart, 300); // Create a new heart every 300ms
+	        // --- START: User's New Story Mode Logic ---
+	        const playStoryBtn = document.getElementById("playStoryBtn");
+	        const storyPopup = document.getElementById("storyPopup");
+	        const storyText = document.getElementById("storyText");
+	        const closeStory = document.getElementById("closeStory");
+	        const storySound = document.getElementById("storySound");
+	        const heartsContainer = document.getElementById("floatingHearts");
+	        const originalMessageEl = document.getElementById("originalMessageText");
+	        
+	        let heartInterval;
+	        
+	        // النص الجديد
+	        const storyMessage =
+	        "قصتنا…؟\nقصة شخصين… واحد كان تايه، ولما لقى التاني… لقى نفسه.\n\nوأنا لقيت نفسي لما لقيتك.";
+
+	        function typeWriter(text, element, speed = 55) {
+	            element.innerHTML = "";
+	            let i = 0;
+	            function typing() {
+	                if (i < text.length) {
+	                    let char = text.charAt(i);
+	                    if (char === '\n') {
+	                        element.innerHTML += '<br>';
+	                    } else {
+	                        element.innerHTML += char;
+	                    }
+	                    i++;
+	                    setTimeout(typing, speed);
+	                }
+	            }
+	            typing();
+	        }
+
+	        // قلوب عشوائية عائمة
+	        function createStoryHeart() {
+	            const heart = document.createElement("div");
+	            heart.classList.add("heart");
+	            heart.textContent = "💗";
+	            heart.style.left = Math.random() * 90 + "%";
+	            heart.style.bottom = "-20px";
+	            heartsContainer.appendChild(heart);
+
+	            setTimeout(() => heart.remove(), 4000);
+	        }
+
+	        playStoryBtn.addEventListener("click", () => {
+	            // 1. Hide the main modal
+	            modal.style.display = "none";
+	            
+	            // 2. Show the new story popup
+	            storyPopup.style.display = "flex";
+	            
+	            // 3. Pause background music
+	            backgroundMusic.pause();
+
+	            // 4. Play story sound
+	            storySound.currentTime = 0;
+	            storySound.play().catch(e => console.error("Story sound failed to play:", e));
+
+	            // 5. Type the text
+	            typeWriter(storyMessage, storyText);
+
+	            // 6. Start floating hearts
+	            heartInterval = setInterval(createStoryHeart, 500);
+	        });
+
+	        function closeStoryMode() {
+	            storyPopup.style.display = "none";
+	            clearInterval(heartInterval);
+	            
+	            // Stop story sound and restart background music
+	            storySound.pause();
+	            storySound.currentTime = 0;
+	            backgroundMusic.play().catch(e => console.error("Background music failed to restart:", e));
+	            
+	            // Re-open the main modal
+	            modal.style.display = "block";
+	        }
+
+	        closeStory.addEventListener("click", closeStoryMode);
+
+	        window.addEventListener("click", (e) => {
+	            if (e.target === storyPopup) {
+	                closeStoryMode();
+	            }
+	        });
+	        
+	        // --- END: User's New Story Mode Logic ---
+	        
+	        // Ensure modal closing still works for the main modal
+	        closeModal.onclick = function() { modal.style.display = "none"; }
+	        window.onclick = function(event) {
+	            if (event.target == modal) {
+	                modal.style.display = "none";
+	            }
+	        }
 	    </script>
 </body>
 </html>
