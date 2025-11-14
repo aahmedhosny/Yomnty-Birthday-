@@ -691,11 +691,11 @@
         <section class="gallery-section">
             <h2 class="section-title">📸 Memories Gallery</h2>
 	            <div class="gallery-grid">
-	                <div class="gallery-item"><img src="IMG-20251104-WA0037.jpg" alt="Memory 1"></div>
+	                <div class="gallery-item"><img src="IMG-20251104-WA0038.jpg" alt="Memory 1"></div>
 	                <div class="gallery-item"><img src="IMG_20251029_171941_326.jpg" alt="Memory 2"></div>
 	                <div class="gallery-item"><img src="IMG_20251026_204127_497.jpg" alt="Memory 3"></div>
 	                <div class="gallery-item"><img src="IMG_20251024_152158_050.jpg" alt="Memory 4"></div>
-	                <div class="gallery-item"><img src="Screenshot_20251114_101637.jpg" alt="Memory 5"></div>
+	                <div class="gallery-item"><img src="IMG_20251028_162409_509.jpg" alt="Memory 5"></div>
 	                <div class="gallery-item"><img src="Screenshot_20251114_101605.jpg" alt="Memory 6"></div>
 	            </div>
         </section>
@@ -744,7 +744,9 @@
                     With all my love,<br>
                     Always Yours ✨
                 </p>
-                <div class="memory-image">🌹 صورتك تضيء حياتي 🌹<br><br>ضع صورتك الخاصة هنا</div>
+                <div class="memory-image" style="background: none; padding: 0;">
+                    <img src="IMG-20251104-WA0036.jpg" alt="صورة خاصة" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">
+                </div>
                 <button class="play-story-btn" id="playStoryBtn">▶ Play Our Story</button>
             </div>
         </div>
@@ -835,7 +837,7 @@
 	        });
 
 	        // Time Since Counter (Set your start date here: Year, Month (0-11), Day)
-		        const startDate = new Date(2025, 8, 25); // FIX: Setting the start date to September 25, 2025, so that on Nov 14, 2025, it shows 50 days. (Month is 0-indexed: 8 = September)
+		        const startDate = new Date(2025, 8, 25, 1); // FIX: Adjusted time to 01:00:00 to reduce the displayed hours by 1, as requested by the user. (Month is 0-indexed: 8 = September)
 	        const daysEl = document.getElementById('days');
 	        const hoursEl = document.getElementById('hours');
 	        const minutesEl = document.getElementById('minutes');
